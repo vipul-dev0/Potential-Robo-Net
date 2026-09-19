@@ -1,0 +1,19 @@
+.container { max-width: 920px; margin: 28px auto; font-family: Inter, Roboto, Arial, sans-serif; color: #222; }
+.container h1 { margin: 0 0 12px 0; font-size: 28px; color: #0f172a; }
+.row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.controls { margin-top: 18px; background: #fff; padding: 16px; border-radius: 10px; box-shadow: 0 6px 18px rgba(15,23,42,0.08); }
+.btn-row { margin: 10px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+button { margin: 0; padding: 10px 14px; border: none; background: linear-gradient(180deg,#2563eb,#1d4ed8); color: white; border-radius: 8px; cursor: pointer; font-weight: 600; }
+button[data-cmd="S"] { background: linear-gradient(180deg,#6b7280,#4b5563); }
+button[data-cmd="V"], button[data-cmd="W"], button[data-cmd="w"] { background: linear-gradient(180deg,#f97316,#ea580c); }
+button:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(37,99,235,0.12); }
+.status { margin-top: 12px; display: flex; gap: 16px; }
+.status > div { background: #f8fafc; padding: 10px 12px; border-radius: 8px; min-width: 140px; text-align: center; box-shadow: 0 2px 6px rgba(2,6,23,0.04); }
+label { margin-right: 8px; }
+input { padding: 8px 10px; border-radius: 8px; border: 1px solid #e6edf3; }
+
+@media (max-width: 640px) {
+	.container { padding: 12px; }
+	.btn-row { gap: 6px; }
+	button { padding: 8px 10px; font-size: 14px; }
+}

@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Robot Controller</title>
+    <link rel="stylesheet" href="{% static 'robot_control/styles.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Robot Controller</h1>
+
+      <div class="row">
+        <label>Robot IP (host:port): <input id="robotIp" value="192.168.4.1"></label>
+        <button id="saveIp">Save</button>
+      </div>
+
+      <div class="status">
+        <div>Distance: <span id="distance">-</span> cm</div>
+        <div>Speed: <span id="speed">-</span></div>
+      </div>
+
+      <div class="controls">
+        <div class="btn-row">
+          <button data-cmd="F">Forward</button>
+          <button data-cmd="B">Backward</button>
+          <button data-cmd="L">Left</button>
+          <button data-cmd="R">Right</button>
+          <button data-cmd="S">Stop</button>
+        </div>
+        <div class="btn-row">
+          <button data-cmd="G">Forward Left</button>
+          <button data-cmd="I">Forward Right</button>
+          <button data-cmd="H">Backward Left</button>
+          <button data-cmd="J">Backward Right</button>
+        </div>
+        <div class="btn-row">
+          <button data-cmd="V">Beep</button>
+          <button data-cmd="W">Light On</button>
+          <button data-cmd="w">Light Off</button>
+        </div>
+        <div class="btn-row">
+          Speed:
+          <button data-cmd="0">0</button>
+          <button data-cmd="1">1</button>
+          <button data-cmd="2">2</button>
+          <button data-cmd="3">3</button>
+          <button data-cmd="4">4</button>
+          <button data-cmd="5">5</button>
+          <button data-cmd="6">6</button>
+          <button data-cmd="7">7</button>
+          <button data-cmd="8">8</button>
+          <button data-cmd="9">9</button>
+          <button data-cmd="q">Max</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'robot_control/controller.js' %}"></script>
+  </body>
+</html>
