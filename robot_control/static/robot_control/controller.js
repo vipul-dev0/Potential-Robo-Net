@@ -16,7 +16,9 @@ function setStoredIp(v) {
 saveIpBtn.addEventListener('click', () => {
   const v = robotIpInput.value.trim();
   setStoredIp(v);
-  alert('Saved IP: ' + v);
+  const orig = saveIpBtn.textContent;
+  saveIpBtn.textContent = 'Saved';
+  setTimeout(()=> saveIpBtn.textContent = orig, 1000);
 });
 
 async function sendCmd(cmd) {
@@ -38,6 +40,12 @@ async function sendCmd(cmd) {
           if (parsed.speed) speedEl.textContent = parsed.speed;
         } catch(e){}
       }
+      // highlight the button that issued the command (if present)
+      const btn = document.querySelector('[data-cmd="' + cmd + '"]');
+      if (btn) {
+        btn.classList.add('pressed');
+        setTimeout(()=>btn.classList.remove('pressed'), 220);
+      }
     } else if (data.error) {
       console.warn('Robot error', data.error);
     }
@@ -53,3 +61,15 @@ document.querySelectorAll('[data-cmd]').forEach(btn => {
 
 // Poll status every 3s by sending a harmless 'S' (stop) command to read distance/speed
 setInterval(() => sendCmd('S'), 3000);
+
+// Keyboard control: arrows + space
+window.addEventListener('keydown', (ev) => {
+  if (ev.repeat) return;
+  const map = { 'ArrowUp':'F', 'ArrowDown':'B', 'ArrowLeft':'L', 'ArrowRight':'R', 'Space':'S' };
+  const key = ev.code || ev.key;
+  const cmd = map[key];
+  if (cmd) {
+    ev.preventDefault();
+    sendCmd(cmd);
+  }
+});

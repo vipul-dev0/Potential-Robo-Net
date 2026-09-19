@@ -5,57 +5,84 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Robot Controller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'robot_dashboard/styles.css' %}">
     <link rel="stylesheet" href="{% static 'robot_control/styles.css' %}">
   </head>
   <body>
-    <div class="container">
-      <h1>Robot Controller</h1>
+    <header class="topbar">
+        <div class="brand-wrap">
+            <img class="brand-logo" src="{% static 'branding/app-logo.png' %}" alt="Potential Robot logo">
+            <div>
+                <div class="brand-name">Potential Robot</div>
+                <div class="brand-tag">Remote controller</div>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/control/">Controller</a>
+        </nav>
+    </header>
 
-      <div class="row">
-        <label>Robot IP (host:port): <input id="robotIp" value="192.168.4.1"></label>
-        <button id="saveIp">Save</button>
-      </div>
+    <main>
+      <section class="info-panel" style="margin-top:28px;">
+        <div class="section-heading">
+          <span class="eyebrow">Controller</span>
+          <h2>Remote Control</h2>
+        </div>
 
-      <div class="status">
-        <div>Distance: <span id="distance">-</span> cm</div>
-        <div>Speed: <span id="speed">-</span></div>
-      </div>
+        <div class="controller-wrap">
+          <div class="left-panel">
+            <div class="connection-row">
+              <label>Robot IP: <input id="robotIp" value="192.168.4.1"></label>
+              <button id="saveIp" class="secondary-btn">Save</button>
+            </div>
 
-      <div class="controls">
-        <div class="btn-row">
-          <button data-cmd="F">Forward</button>
-          <button data-cmd="B">Backward</button>
-          <button data-cmd="L">Left</button>
-          <button data-cmd="R">Right</button>
-          <button data-cmd="S">Stop</button>
+            <div class="telemetry">
+              <div class="stat-card"><div class="stat-label">Distance</div><div class="stat-value" id="distance">-</div></div>
+              <div class="stat-card"><div class="stat-label">Speed</div><div class="stat-value" id="speed">-</div></div>
+            </div>
+
+            <div class="actions">
+              <button data-cmd="V" class="action warn">Beep</button>
+              <button data-cmd="W" class="action warn">Light On</button>
+              <button data-cmd="w" class="action muted">Light Off</button>
+            </div>
+
+            <div class="speed-presets">
+              <div class="eyebrow">Speed presets</div>
+              <div class="btn-row speed-row">
+                <button data-cmd="0">0</button>
+                <button data-cmd="3">3</button>
+                <button data-cmd="5">5</button>
+                <button data-cmd="7">7</button>
+                <button data-cmd="q">Max</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-panel">
+            <div class="dpad">
+              <button class="d up" data-cmd="F">▲</button>
+              <div class="d-row">
+                <button class="d left" data-cmd="L">◀</button>
+                <button class="d stop" data-cmd="S">■</button>
+                <button class="d right" data-cmd="R">▶</button>
+              </div>
+              <button class="d down" data-cmd="B">▼</button>
+
+              <!-- Diagonal buttons placed at the four corners of the dpad. Empty content — arrow is shown by shape. -->
+              <button data-cmd="G" class="diag tl" title="Forward Left" aria-label="Forward Left"></button>
+              <button data-cmd="I" class="diag tr" title="Forward Right" aria-label="Forward Right"></button>
+              <button data-cmd="H" class="diag bl" title="Backward Left" aria-label="Backward Left"></button>
+              <button data-cmd="J" class="diag br" title="Backward Right" aria-label="Backward Right"></button>
+            </div>
+          </div>
         </div>
-        <div class="btn-row">
-          <button data-cmd="G">Forward Left</button>
-          <button data-cmd="I">Forward Right</button>
-          <button data-cmd="H">Backward Left</button>
-          <button data-cmd="J">Backward Right</button>
-        </div>
-        <div class="btn-row">
-          <button data-cmd="V">Beep</button>
-          <button data-cmd="W">Light On</button>
-          <button data-cmd="w">Light Off</button>
-        </div>
-        <div class="btn-row">
-          Speed:
-          <button data-cmd="0">0</button>
-          <button data-cmd="1">1</button>
-          <button data-cmd="2">2</button>
-          <button data-cmd="3">3</button>
-          <button data-cmd="4">4</button>
-          <button data-cmd="5">5</button>
-          <button data-cmd="6">6</button>
-          <button data-cmd="7">7</button>
-          <button data-cmd="8">8</button>
-          <button data-cmd="9">9</button>
-          <button data-cmd="q">Max</button>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <script src="{% static 'robot_control/controller.js' %}"></script>
   </body>
